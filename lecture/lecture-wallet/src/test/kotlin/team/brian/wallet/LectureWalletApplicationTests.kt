@@ -1,10 +1,10 @@
-package team.brian.payment
+package team.brian.wallet
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
-class PaymentApplicationTests {
+class LectureWalletApplicationTests {
 
     @Test
     fun contextLoads() {

@@ -1,11 +1,11 @@
-package team.brian.payment
+package team.brian.wallet
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class PaymentApplication
+class LectureWalletApplication
 
 fun main(args: Array<String>) {
-    runApplication<PaymentApplication>(*args)
+    runApplication<LectureWalletApplication>(*args)
 }
