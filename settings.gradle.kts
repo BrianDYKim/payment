@@ -38,5 +38,6 @@ fun File.registerSubDirectoriesAsModule() {
 
 // 모듈 등록
 listOf("lecture", "commons")
+    .plus(arrayOf("lecture", "commons"))
     .map { File(it) }
     .map { it.registerSubDirectoriesAsModule() }

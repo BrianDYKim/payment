@@ -47,9 +47,7 @@ allprojects {
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
         implementation("com.fasterxml.jackson.module:jackson-module-afterburner")
 
-        // Test
-        testImplementation("org.springframework.boot:spring-boot-starter-test")
-        testImplementation("io.mockk:mockk:$mockKVersion")
+        implementation("io.github.oshai:kotlin-logging-jvm:5.1.0")
     }
 
     repositories {
@@ -99,6 +97,52 @@ configure(subprojects.filter { it.name !in nonDependencyProjects }) {
 
         // Validation
         implementation("jakarta.validation:jakarta.validation-api")
+
+        // Test
+        testImplementation("org.springframework.boot:spring-boot-starter-test")
+        testImplementation("io.mockk:mockk:$mockKVersion")
+    }
+
+    tasks.withType<Test> {
+        useJUnitPlatform()
+    }
+}
+
+val lectureDependencies =
+    File("lecture")
+        .listFiles()
+        ?.filter { it.isDirectory }
+        ?.map { it.name }
+        ?: emptyList()
+
+configure(subprojects.filter { it.name in lectureDependencies }) {
+    dependencies {
+        // Spring Webflux
+        implementation("org.springframework.boot:spring-boot-starter-webflux")
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
+        implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
+
+        // R2DBC
+        implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
+
+        // Actuator
+        implementation("org.springframework.boot:spring-boot-starter-actuator")
+
+        // Thymleaf
+        implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+
+        // Kafka
+        implementation("org.springframework.cloud:spring-cloud-stream")
+        implementation("org.springframework.cloud:spring-cloud-stream-binder-kafka-reactive:4.1.3")
+
+        // Runtime dependencies
+        runtimeOnly("com.mysql:mysql-connector-j")
+        runtimeOnly("io.asyncer:r2dbc-mysql")
+
+        // Test
+        testImplementation("org.springframework.boot:spring-boot-starter-test")
+        testImplementation("io.mockk:mockk:1.13.2")
+        testImplementation("io.projectreactor:reactor-test")
     }
 
     tasks.withType<Test> {
