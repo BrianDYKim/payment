@@ -76,14 +76,15 @@ allprojects {
     }
 }
 
-val nonDependencyProjects = listOf("lecture")
-    .map { File(it) }
-    .mapNotNull { it.listFiles() }
-    .flatMap { files ->
-        files.filter { it.isDirectory }
-            .map { it.name }
-    }
-    .plus(arrayOf("commons", "lecture"))
+val nonDependencyProjects =
+    listOf("lecture")
+        .map { File(it) }
+        .mapNotNull { it.listFiles() }
+        .flatMap { files ->
+            files.filter { it.isDirectory }
+                .map { it.name }
+        }
+        .plus(arrayOf("commons", "lecture"))
 
 // lectures 모듈을 제외하고 Spring 기본 의존성을 추가해준다 -> lecture 모듈은 Spring Webflux를 이용
 configure(subprojects.filter { it.name !in nonDependencyProjects }) {
