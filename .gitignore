@@ -42,3 +42,6 @@ out/
 ### yml ###
 *.yml
 *.yaml
+
+# DS_STORE
+*.DS_Store
