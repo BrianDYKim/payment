@@ -1,4 +1,4 @@
-package team.brian.payment.payment.adapter.outbound.web.config
+package team.brian.payment.payment.adapter.outbound.web.toss.config
 
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
