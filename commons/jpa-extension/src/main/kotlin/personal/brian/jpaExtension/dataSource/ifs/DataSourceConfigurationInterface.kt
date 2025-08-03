@@ -1,6 +1,9 @@
 package personal.brian.jpaExtension.dataSource.ifs
 
+import jakarta.persistence.EntityManagerFactory
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean
+import org.springframework.transaction.PlatformTransactionManager
 import personal.brian.jpaExtension.dataSource.type.BaseRoutingDataSource
 import javax.sql.DataSource
 
@@ -16,10 +19,12 @@ interface DataSourceConfigurationInterface {
     fun routingDataSource(
         readDataSource: DataSource,
         writeDataSource: DataSource,
-    ): DataSource
+    ): BaseRoutingDataSource
 
     fun entityManagerFactory(
         builder: EntityManagerFactoryBuilder,
         routingDataSource: BaseRoutingDataSource,
-    )
+    ): LocalContainerEntityManagerFactoryBean
+
+    fun transactionManager(entityManagerFactory: EntityManagerFactory): PlatformTransactionManager
 }
