@@ -43,6 +43,6 @@ fun File.registerGradleModulesRecursively(parentPath: String = this.name) {
 }
 
 // 모듈 등록
-listOf("commons", "ledger", "wallet")
+listOf("commons", "ledger", "wallet", "payment")
     .map { File(it) }
     .map { it.registerGradleModulesRecursively() }
