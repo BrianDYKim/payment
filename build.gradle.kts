@@ -106,17 +106,17 @@ allprojects {
         if (isBuildTriggered) {
             tasks.matching {
                 it.name in
-                        listOf(
-                            "ktlintCheck",
-                            "ktlintFormat",
-                            "runKtlintCheckOverMainSourceSet",
-                            "runKtlintCheckOverTestSourceSet",
-                            "runKtlintCheckOverKotlinScripts",
-                            "runKtlintFormatOverMainSourceSet",
-                            "runKtlintFormatOverTestSourceSet",
-                            "runKtlintFormatOverKotlinScripts",
-                            "loadKtlintReporters",
-                        )
+                    listOf(
+                        "ktlintCheck",
+                        "ktlintFormat",
+                        "runKtlintCheckOverMainSourceSet",
+                        "runKtlintCheckOverTestSourceSet",
+                        "runKtlintCheckOverKotlinScripts",
+                        "runKtlintFormatOverMainSourceSet",
+                        "runKtlintFormatOverTestSourceSet",
+                        "runKtlintFormatOverKotlinScripts",
+                        "loadKtlintReporters",
+                    )
             }.configureEach {
                 enabled = false
             }

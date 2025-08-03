@@ -23,15 +23,26 @@ pluginManagement {
     }
 }
 
-fun File.registerSubDirectoriesAsModule() {
-    this.listFiles()?.forEach { file ->
-        if (file.isDirectory) {
-            include("${this.name}:${file.name}")
+// 다중 디렉토리 탐색이 가능하게 설정
+fun File.registerGradleModulesRecursively(parentPath: String = this.name) {
+    this.listFiles()
+        ?.filter { it.isDirectory && !it.name.startsWith(".") }
+        ?.forEach { dir ->
+            val modulePath = "$parentPath:${dir.name}"
+
+            // 해당 디렉토리가 유효한 Gradle 모듈인지 확인
+            val hasGradleFile = dir.resolve("build.gradle.kts").exists() || dir.resolve("build.gradle").exists()
+
+            if (hasGradleFile) {
+                include(modulePath)
+            }
+
+            // 하위 디렉토리도 계속 탐색 (모듈 여부는 내부에서 판단)
+            dir.registerGradleModulesRecursively(modulePath)
         }
-    }
 }
 
 // 모듈 등록
-listOf("commons")
+listOf("commons", "ledger", "wallet")
     .map { File(it) }
-    .map { it.registerSubDirectoriesAsModule() }
+    .map { it.registerGradleModulesRecursively() }
