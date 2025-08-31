@@ -7,23 +7,26 @@ import org.springframework.web.bind.annotation.RestController
 import personal.brian.payment.application.dto.TossPaymentConfirmDto
 import personal.brian.payment.application.operation.command.TossPaymentConfirmCommand
 import personal.brian.payment.application.service.PaymentService
-import personal.brian.payment.pspToss.payload.PaymentExecutionResult
+import personal.brian.response.generator.ApiResponseGenerator
+import personal.brian.response.payload.SuccessResponse
 
 /**
  * @author Doyeop Kim
  * @since 2025. 8. 10.
  */
 @RestController
-@RequestMapping("/payment/v1/toss")
+@RequestMapping("/api/v1/payment/toss")
 class TossPaymentController(
     private val paymentService: PaymentService,
 ) {
     @PostMapping("/confirm")
     fun confirm(
         @RequestBody request: TossPaymentConfirmDto.Request,
-    ): PaymentExecutionResult {
+    ): SuccessResponse.Single<String> {
         val tossPaymentConfirmationCommand = TossPaymentConfirmCommand.from(request)
 
-        return paymentService.confirmTossPayment(tossPaymentConfirmationCommand)
+        val responseBody = paymentService.confirmTossPayment(tossPaymentConfirmationCommand)
+
+        return ApiResponseGenerator.getSingleDataResponse(responseBody)
     }
 }

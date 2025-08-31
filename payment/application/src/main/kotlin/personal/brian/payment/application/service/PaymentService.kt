@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service
 import personal.brian.payment.application.operation.command.TossPaymentConfirmCommand
 import personal.brian.payment.pspToss.executor.TossPaymentExecutor
 import personal.brian.payment.pspToss.payload.PaymentConfirmPayload
-import personal.brian.payment.pspToss.payload.PaymentExecutionResult
+import personal.brian.springExtension.logger.ApplicationLogger
 
 /**
  * @author Doyeop Kim
@@ -15,7 +15,9 @@ import personal.brian.payment.pspToss.payload.PaymentExecutionResult
 class PaymentService(
     private val tossPaymentExecutor: TossPaymentExecutor,
 ) {
-    fun confirmTossPayment(command: TossPaymentConfirmCommand): PaymentExecutionResult {
+    private val logger by lazy { ApplicationLogger(this::class.java) }
+
+    fun confirmTossPayment(command: TossPaymentConfirmCommand): String {
         val tossConfirmationPayload =
             PaymentConfirmPayload(
                 paymentKey = command.paymentKey,
@@ -23,8 +25,13 @@ class PaymentService(
                 amount = command.amount,
             )
 
-        return runBlocking {
-            tossPaymentExecutor.execute(tossConfirmationPayload)
-        }
+        val confirmationResult =
+            runBlocking {
+                tossPaymentExecutor.execute(tossConfirmationPayload)
+            }
+
+        logger.info("Toss Payment Confirmation Result: $confirmationResult")
+
+        return "OK!"
     }
 }

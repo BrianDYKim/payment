@@ -49,7 +49,7 @@
             amount: urlParams.get("amount"),
         };
 
-        const response = await fetch("/payment/v1/toss/confirm", {
+        const response = await fetch("/api/v1/payment/toss/confirm", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

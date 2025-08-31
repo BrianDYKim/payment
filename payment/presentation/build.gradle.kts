@@ -1,6 +1,9 @@
 dependencies {
+    api(project(":commons:response"))
+    api(project(":commons:spring-extension"))
+    api(project(":commons:exception"))
+
     api(project(":payment:application"))
-    api(project(":payment:externals:psp-toss"))
 
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
 }
