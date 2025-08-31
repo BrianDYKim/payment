@@ -7,5 +7,5 @@ package personal.brian.payment.pspToss.payload
 data class PaymentConfirmPayload(
     val paymentKey: String,
     val orderId: String,
-    val amount: Long,
+    val amount: String,
 )
