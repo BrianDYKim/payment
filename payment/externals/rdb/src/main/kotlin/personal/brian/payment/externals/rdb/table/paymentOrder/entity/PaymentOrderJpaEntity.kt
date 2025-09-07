@@ -31,6 +31,8 @@ class PaymentOrderJpaEntity(
     val orderId: String,
     @Column(name = "amount", nullable = false)
     val amount: BigDecimal,
+    @Column(name = "currency", nullable = false)
+    val currency: String,
     @Column(name = "payment_order_status", nullable = false)
     val paymentOrderStatus: String,
     @Column(name = "ledger_updated", nullable = false)

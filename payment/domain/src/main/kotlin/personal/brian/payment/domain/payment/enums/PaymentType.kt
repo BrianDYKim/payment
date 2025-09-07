@@ -1,4 +1,4 @@
-package personal.brian.payment.domain
+package personal.brian.payment.domain.payment.enums
 
 import personal.brian.payment.domain.error.ErrorCode
 import personal.brian.payment.domain.error.PaymentDomainException

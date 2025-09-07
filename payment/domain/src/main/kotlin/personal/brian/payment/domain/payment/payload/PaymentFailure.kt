@@ -1,4 +1,4 @@
-package personal.brian.payment.domain
+package personal.brian.payment.domain.payment.payload
 
 /**
  * @author Doyeop Kim

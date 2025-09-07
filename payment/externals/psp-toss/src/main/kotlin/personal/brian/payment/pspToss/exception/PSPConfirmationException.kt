@@ -1,6 +1,6 @@
 package personal.brian.payment.pspToss.exception
 
-import personal.brian.payment.domain.PaymentStatus
+import personal.brian.payment.domain.payment.enums.PaymentStatus
 
 class PSPConfirmationException(
     val errorCode: String,

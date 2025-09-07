@@ -6,10 +6,10 @@ import org.springframework.http.HttpStatusCode
 import org.springframework.stereotype.Component
 import org.springframework.web.client.RestClient
 import org.springframework.web.client.body
-import personal.brian.payment.domain.PSPConfirmationStatus
-import personal.brian.payment.domain.PaymentFailure
-import personal.brian.payment.domain.PaymentMethod
-import personal.brian.payment.domain.PaymentType
+import personal.brian.payment.domain.payment.enums.PSPConfirmationStatus
+import personal.brian.payment.domain.payment.enums.PaymentMethod
+import personal.brian.payment.domain.payment.enums.PaymentType
+import personal.brian.payment.domain.payment.payload.PaymentFailure
 import personal.brian.payment.pspToss.exception.PSPConfirmationException
 import personal.brian.payment.pspToss.exception.TossPaymentError
 import personal.brian.payment.pspToss.payload.PaymentConfirmPayload

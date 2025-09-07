@@ -1,10 +1,10 @@
 package personal.brian.payment.pspToss.payload
 
-import personal.brian.payment.domain.PSPConfirmationStatus
-import personal.brian.payment.domain.PaymentFailure
-import personal.brian.payment.domain.PaymentMethod
-import personal.brian.payment.domain.PaymentStatus
-import personal.brian.payment.domain.PaymentType
+import personal.brian.payment.domain.payment.enums.PSPConfirmationStatus
+import personal.brian.payment.domain.payment.enums.PaymentMethod
+import personal.brian.payment.domain.payment.enums.PaymentStatus
+import personal.brian.payment.domain.payment.enums.PaymentType
+import personal.brian.payment.domain.payment.payload.PaymentFailure
 import java.time.LocalDateTime
 
 /**
