@@ -4,7 +4,6 @@ import org.springframework.stereotype.Service
 import personal.brian.payment.application.dto.CheckoutDto
 import personal.brian.payment.application.operation.command.CheckoutCommand
 import personal.brian.payment.application.useCase.FetchProductUseCase
-import personal.brian.payment.application.useCase.ProceedCheckoutUseCase
 import personal.brian.payment.application.useCase.SavePaymentEventUseCase
 import personal.brian.payment.domain.domain.paymentEvent.entity.PaymentOrder
 import personal.brian.payment.domain.domain.paymentEvent.root.PaymentEvent
@@ -19,7 +18,6 @@ import personal.brian.payment.externals.rdb.transaction.executor.Tx
  */
 @Service
 class CheckoutService(
-    private val proceedCheckoutUseCase: ProceedCheckoutUseCase,
     private val fetchProductUseCase: FetchProductUseCase,
     private val savePaymentEventUseCase: SavePaymentEventUseCase,
 ) {
