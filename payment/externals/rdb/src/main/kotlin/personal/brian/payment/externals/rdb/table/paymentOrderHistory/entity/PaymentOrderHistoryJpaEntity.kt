@@ -18,18 +18,18 @@ import java.time.LocalDateTime
 class PaymentOrderHistoryJpaEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long,
+    var id: Long = 0L,
     @Column(name = "payment_order_id", nullable = false)
-    val paymentOrderId: Long,
+    var paymentOrderId: Long = 0L,
     @Column(name = "previous_status", nullable = true)
-    val previousStatus: String?,
+    var previousStatus: String? = null,
     @Column(name = "new_status", nullable = true)
-    val newStatus: String?,
+    var newStatus: String? = null,
     @CreatedDate
     @Column(name = "created_at", nullable = false)
-    val createdAt: LocalDateTime,
+    var createdAt: LocalDateTime = LocalDateTime.now(),
     @Column(name = "changed_by", nullable = true)
-    val changedBy: String?,
+    var changedBy: String? = null,
     @Column(name = "reason", nullable = true)
-    val reason: String?,
+    var reason: String? = null,
 )

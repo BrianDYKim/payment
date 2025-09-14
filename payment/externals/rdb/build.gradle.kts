@@ -1,8 +1,12 @@
 val querydslVersion = "5.1.0"
 
 dependencies {
-    api(project(":commons:jpa-extension"))
-    api(project(":commons:spring-extension"))
+    implementation(project(":commons:jpa-extension"))
+    implementation(project(":commons:spring-extension"))
+
+    implementation(project(":payment:domain"))
+
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 
     // Query DSL
     implementation("com.querydsl:querydsl-jpa:$querydslVersion:jakarta")

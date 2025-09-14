@@ -29,7 +29,7 @@ import kotlin.math.min
 @Configuration
 @EnableJpaRepositories(
     basePackages = ["personal.brian.payment.externals.rdb.table"],
-    entityManagerFactoryRef = "customEntityManagerFactory",
+    entityManagerFactoryRef = "entityManagerFactory",
     transactionManagerRef = "transactionManager",
 )
 class CustomDataSourceConfiguration(

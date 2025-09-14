@@ -33,10 +33,10 @@ class CheckoutService(
             val savedPaymentEvent = savePaymentEventUseCase.save(paymentEvent)
 
             // response payload를 조립하여 반환
-            return@writable CheckoutDto.Response(
+            return@writable CheckoutDto.Response.of(
                 orderId = savedPaymentEvent.orderId,
                 orderName = savedPaymentEvent.orderName,
-                amount = savedPaymentEvent.calculateTotalAmount(),
+                price = savedPaymentEvent.calculateTotalAmount(),
             )
         }
 

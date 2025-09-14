@@ -8,6 +8,9 @@ import jakarta.persistence.Id
 import jakarta.persistence.Table
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
+import personal.brian.payment.domain.payment.enums.PaymentStatus
+import personal.brian.payment.domain.price.Currency
+import personal.brian.payment.domain.price.Price
 import java.math.BigDecimal
 import java.time.LocalDateTime
 
@@ -20,33 +23,53 @@ import java.time.LocalDateTime
 class PaymentOrderJpaEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long,
+    var id: Long = 0L,
     @Column(name = "payment_event_id", nullable = false)
-    val paymentEventId: Long,
+    var paymentEventId: Long = 0L,
     @Column(name = "seller_id", nullable = false)
-    val sellerId: Long,
+    var sellerId: Long = 0L,
     @Column(name = "product_id", nullable = false)
-    val productId: Long,
+    var productId: Long = 0L,
     @Column(name = "order_id", nullable = false)
-    val orderId: String,
+    var orderId: String = "",
     @Column(name = "amount", nullable = false)
-    val amount: BigDecimal,
+    var amount: BigDecimal = BigDecimal.ZERO,
     @Column(name = "currency", nullable = false)
-    val currency: String,
+    var currency: String = Currency.KRW.name,
     @Column(name = "payment_order_status", nullable = false)
-    val paymentOrderStatus: String,
+    var paymentOrderStatus: String = PaymentStatus.NOT_STARTED.name,
     @Column(name = "ledger_updated", nullable = false)
-    val ledgerUpdated: Boolean,
+    var ledgerUpdated: Boolean = false,
     @Column(name = "wallet_updated", nullable = false)
-    val walletUpdated: Boolean,
+    var walletUpdated: Boolean = false,
     @Column(name = "failed_count", nullable = false)
-    val failedCount: Byte,
+    var failedCount: Int = 0,
     @Column(name = "threshold", nullable = false)
-    val threshold: Byte,
+    var threshold: Int = 0,
     @CreatedDate
     @Column(name = "created_at", nullable = false)
-    val createdAt: LocalDateTime,
+    var createdAt: LocalDateTime = LocalDateTime.now(),
     @LastModifiedDate
     @Column(name = "updated_at", nullable = false)
-    val updatedAt: LocalDateTime,
-)
+    var updatedAt: LocalDateTime = LocalDateTime.now(),
+) {
+    companion object {
+        fun new(
+            paymentEventId: Long,
+            sellerId: Long,
+            productId: Long,
+            orderId: String,
+            price: Price,
+            status: PaymentStatus,
+        ) = PaymentOrderJpaEntity().apply {
+            this.id = 0L
+            this.paymentEventId = paymentEventId
+            this.sellerId = sellerId
+            this.productId = productId
+            this.orderId = orderId
+            this.amount = price.amount
+            this.currency = price.currency.name
+            this.paymentOrderStatus = status.name
+        }
+    }
+}

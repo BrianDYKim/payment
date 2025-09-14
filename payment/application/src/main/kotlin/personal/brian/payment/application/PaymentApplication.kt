@@ -8,5 +8,5 @@ import org.springframework.context.annotation.ComponentScan
  * @since 2025. 8. 31.
  */
 @SpringBootApplication
-@ComponentScan(basePackages = ["personal.brian.payment.pspToss"])
+@ComponentScan(basePackages = ["personal.brian.payment.pspToss", "personal.brian.payment.infrastructure"])
 class PaymentApplication

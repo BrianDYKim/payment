@@ -8,6 +8,7 @@ import jakarta.persistence.Id
 import jakarta.persistence.Table
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
+import personal.brian.payment.domain.payment.enums.PaymentType
 import java.time.LocalDateTime
 
 /**
@@ -19,29 +20,43 @@ import java.time.LocalDateTime
 class PaymentEventJpaEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long,
+    var id: Long = 0L,
     @Column(name = "buyer_id", nullable = false)
-    val buyerId: Long,
+    var buyerId: Long = 0L,
     @Column(name = "is_payment_done", nullable = false)
-    val isPaymentDone: Boolean,
+    var isPaymentDone: Boolean = false,
     @Column(name = "payment_key", nullable = true)
-    val paymentKey: String?,
+    var paymentKey: String? = null,
     @Column(name = "order_id", nullable = true)
-    val orderId: String?,
+    var orderId: String? = null,
     @Column(name = "type", nullable = false)
-    val type: String,
+    var type: String = PaymentType.NORMAL.name,
     @Column(name = "order_name", nullable = false)
-    val orderName: String,
-    @Column(name = "method", nullable = false)
-    val method: String,
+    var orderName: String = "",
+    @Column(name = "method", nullable = true)
+    var method: String? = null,
     @Column(name = "psp_raw_data", nullable = true)
-    val pspRawData: String?,
+    var pspRawData: String? = null,
     @Column(name = "approved_at", nullable = true)
-    val approvedAt: LocalDateTime?,
+    var approvedAt: LocalDateTime? = null,
     @CreatedDate
     @Column(name = "created_at", nullable = false)
-    val createdAt: LocalDateTime,
+    var createdAt: LocalDateTime = LocalDateTime.now(),
     @LastModifiedDate
     @Column(name = "updated_at", nullable = false)
-    val updatedAt: LocalDateTime,
-)
+    var updatedAt: LocalDateTime = LocalDateTime.now(),
+) {
+    companion object {
+        fun new(
+            buyerId: Long,
+            orderName: String,
+            orderId: String,
+        ) = PaymentEventJpaEntity()
+            .apply {
+                this.id = 0L
+                this.buyerId = buyerId
+                this.orderName = orderName
+                this.orderId = orderId
+            }
+    }
+}
